@@ -8,10 +8,13 @@
 #include <conio.h>
 #include "Globals.h"
 
-
+#define PI 3.141592
 
 GLuint vboId;
 Shaders myShaders;
+
+float angle = 0.0f;
+float step = 0.0001f;
 
 int Init ( ESContext *esContext )
 {
@@ -45,6 +48,9 @@ int Init ( ESContext *esContext )
 
 void Draw ( ESContext *esContext )
 {
+	Matrix mRotation;
+	mRotation.SetRotationZ(angle);
+
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glUseProgram(myShaders.program);
@@ -64,6 +70,11 @@ void Draw ( ESContext *esContext )
 		glVertexAttribPointer(myShaders.colorAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)sizeof(Vector3));
 	}
 
+	if (myShaders.matrixUniform != -1)
+	{
+		glUniformMatrix4fv(myShaders.matrixUniform, 1, GL_FALSE, (float*)mRotation.m);
+	}
+
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -73,7 +84,10 @@ void Draw ( ESContext *esContext )
 
 void Update ( ESContext *esContext, float deltaTime )
 {
-
+	angle += step;
+	
+	if (angle >= 2 * PI)
+		angle -= 2 * PI;
 }
 
 void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)
