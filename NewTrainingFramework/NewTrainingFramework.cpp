@@ -27,8 +27,8 @@ int Init ( ESContext *esContext )
 
 	// Set Color of vertices
 	verticesData[0].color.x = 1.0f; verticesData[0].color.y = 0.0f; verticesData[0].color.z = 0.0f;
-	verticesData[0].color.x = 0.0f; verticesData[0].color.y = 1.0f; verticesData[0].color.z = 0.0f;
-	verticesData[0].color.x = 0.0f; verticesData[0].color.y = 0.0f; verticesData[0].color.z = 1.0f;
+	verticesData[1].color.x = 0.0f; verticesData[1].color.y = 1.0f; verticesData[1].color.z = 0.0f;
+	verticesData[2].color.x = 0.0f; verticesData[2].color.y = 0.0f; verticesData[2].color.z = 1.0f;
 	
 	
 	
