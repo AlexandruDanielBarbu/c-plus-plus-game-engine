@@ -20,10 +20,18 @@ int Init ( ESContext *esContext )
 	//triangle data (heap)
 	Vertex verticesData[3];
 
+	// Set position of vertices
 	verticesData[0].pos.x =  0.0f;  verticesData[0].pos.y =  0.5f;  verticesData[0].pos.z =  0.0f;
 	verticesData[1].pos.x = -0.5f;  verticesData[1].pos.y = -0.5f;  verticesData[1].pos.z =  0.0f;
 	verticesData[2].pos.x =  0.5f;  verticesData[2].pos.y = -0.5f;  verticesData[2].pos.z =  0.0f;
 
+	// Set Color of vertices
+	verticesData[0].color.x = 1.0f; verticesData[0].color.y = 0.0f; verticesData[0].color.z = 0.0f;
+	verticesData[0].color.x = 0.0f; verticesData[0].color.y = 1.0f; verticesData[0].color.z = 0.0f;
+	verticesData[0].color.x = 0.0f; verticesData[0].color.y = 0.0f; verticesData[0].color.z = 1.0f;
+	
+	
+	
 	//buffer object
 	glGenBuffers(1, &vboId);
 	glBindBuffer(GL_ARRAY_BUFFER, vboId);
@@ -48,6 +56,12 @@ void Draw ( ESContext *esContext )
 	{
 		glEnableVertexAttribArray(myShaders.positionAttribute);
 		glVertexAttribPointer(myShaders.positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
+	}
+
+	if (myShaders.colorAttribute != -1)
+	{
+		glEnableVertexAttribArray(myShaders.colorAttribute);
+		glVertexAttribPointer(myShaders.colorAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)sizeof(Vector3));
 	}
 
 	glDrawArrays(GL_TRIANGLES, 0, 3);
