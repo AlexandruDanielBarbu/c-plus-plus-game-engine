@@ -14,7 +14,7 @@ GLuint vboId;
 Shaders myShaders;
 
 float angle = 0.0f;
-float step = 0.0001f;
+float step = 0.1f;
 
 int Init ( ESContext *esContext )
 {
@@ -74,7 +74,6 @@ void Draw ( ESContext *esContext )
 	{
 		glUniformMatrix4fv(myShaders.matrixUniform, 1, GL_FALSE, (float*)mRotation.m);
 	}
-
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
