@@ -7,6 +7,7 @@
 #include "Shaders.h"
 #include <conio.h>
 #include "Globals.h"
+#include "Camera.h"
 
 #define PI 3.141592
 
@@ -15,6 +16,7 @@ Shaders myShaders;
 
 float angle = 0.0f;
 float step = 0.1f;
+float totalTime = 0.0f;
 
 int Init ( ESContext *esContext )
 {
@@ -83,15 +85,24 @@ void Draw ( ESContext *esContext )
 
 void Update ( ESContext *esContext, float deltaTime )
 {
-	angle += step;
+	// Update the timer with delta time
+	totalTime += deltaTime;
+
+	if (totalTime > Globals::frameTime) {
+		// Reset the timer of the update loop
+		totalTime -= Globals::frameTime;
+
+		// Perform update operations here
+		angle += step;
 	
-	if (angle >= 2 * PI)
-		angle -= 2 * PI;
+		if (angle >= 2 * PI)
+			angle -= 2 * PI;
+	}
 }
 
 void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)
 {
-	
+	printf("Key:\t%c\tpressed?\t%d\n", key, (int)bIsPressed);
 }
 
 void CleanUp()

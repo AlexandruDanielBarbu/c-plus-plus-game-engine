@@ -1,1 +1,6 @@
-﻿  NewTrainingFramework.vcxproj -> D:\University\gameloft\proiect_2015\proiect_2015\NewTrainingFramework_2015\BIN-Nvidia\NewTrainingFramework.exe
+﻿cl : command line  warning D9035: option 'Gm' has been deprecated and will be removed in a future release
+  Globals.cpp
+  Camera.cpp
+  Generating Code...
+Camera.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+  NewTrainingFramework.vcxproj -> D:\University\gameloft\proiect_2015\proiect_2015\NewTrainingFramework_2015\BIN-Nvidia\NewTrainingFramework.exe

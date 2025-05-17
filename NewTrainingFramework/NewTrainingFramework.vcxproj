@@ -163,6 +163,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Globals.cpp" />
     <ClCompile Include="NewTrainingFramework.cpp" />
     <ClCompile Include="Shaders.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -173,6 +175,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Shaders.h" />
     <ClInclude Include="stdafx.h" />
