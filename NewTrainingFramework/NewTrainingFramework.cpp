@@ -11,6 +11,7 @@
 
 #define PI 3.141592
 
+Camera game_camera;
 GLuint vboId;
 Shaders myShaders;
 
@@ -76,6 +77,17 @@ void Draw ( ESContext *esContext )
 	{
 		glUniformMatrix4fv(myShaders.matrixUniform, 1, GL_FALSE, (float*)mRotation.m);
 	}
+
+	Matrix modelMatrix;
+	modelMatrix.SetRotationZ(angle);
+
+	Matrix MVP = modelMatrix * game_camera.viewMatrix * game_camera.perspectiveMatrix;
+
+	if (myShaders.modelViewPerspectiveUniform != -1)
+	{
+		glUniformMatrix4fv(myShaders.modelViewPerspectiveUniform, 1, GL_FALSE, &MVP.m[0][0]);
+	}
+
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -92,6 +104,9 @@ void Update ( ESContext *esContext, float deltaTime )
 		// Reset the timer of the update loop
 		totalTime -= Globals::frameTime;
 
+		// Set camera deltaTime
+		game_camera.setDeltaTime(Globals::frameTime);
+
 		// Perform update operations here
 		angle += step;
 	
@@ -100,9 +115,62 @@ void Update ( ESContext *esContext, float deltaTime )
 	}
 }
 
-void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)
-{
+#define MOVEMENT_STEP 10.0f
+void Key ( ESContext *esContext, unsigned char key, bool bIsPressed) {
 	printf("Key:\t%c\tpressed?\t%d\n", key, (int)bIsPressed);
+
+	switch (key) {
+	case 'w': case 'W':
+		game_camera.moveOz(-MOVEMENT_STEP);
+		break;
+
+	case 's': case 'S':
+		game_camera.moveOz(MOVEMENT_STEP);
+		break;
+
+	case 'd': case 'D':
+		game_camera.moveOx(MOVEMENT_STEP);
+		break;
+
+	case 'a': case 'A':
+		game_camera.moveOx(-MOVEMENT_STEP);
+		break;
+
+	case 'q': case 'Q':
+		game_camera.moveOy(MOVEMENT_STEP);
+		break;
+
+	case 'e': case 'E':
+		game_camera.moveOy(-MOVEMENT_STEP);
+		break;
+
+	case VK_UP:
+		game_camera.rotateOx(MOVEMENT_STEP);
+		break;
+
+	case VK_DOWN:
+		game_camera.rotateOx(-MOVEMENT_STEP);
+		break;
+
+	case VK_RIGHT:
+		game_camera.rotateOy(-MOVEMENT_STEP);
+		break;
+	
+	case VK_LEFT:
+		game_camera.rotateOy(MOVEMENT_STEP);
+		break;
+
+	case 'c': case 'C':
+		game_camera.rotateOz(-MOVEMENT_STEP);
+		break;
+
+	case 'z': case 'Z':
+		game_camera.rotateOz(MOVEMENT_STEP);
+		break;
+
+	default:
+		break;
+	}
 }
 
 void CleanUp()

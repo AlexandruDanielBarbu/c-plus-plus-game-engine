@@ -6,6 +6,16 @@ class Camera
 {
   public:
 	Camera();
+	Camera(
+		const Vector3& position,
+		const Vector3& target,
+		const Vector3& up,
+		float moveSpeed = 5.0f,
+		float rotateSpeed = 2.0f,
+		float nearPlane = 0.1f,
+		float farPlane = 100.0f,
+		float fov = 45.0f
+	);
 	~Camera();
 
 	void moveOx(int sens);
@@ -24,7 +34,10 @@ class Camera
 	 */
 	void updateWorldView();
 
-	void setDeltaTime(GLfloat);
+	void setDeltaTime(GLfloat newDeltaTime);
+
+	Matrix viewMatrix;
+	Matrix perspectiveMatrix;
 
   private:
 	  Vector3 position;
@@ -44,6 +57,5 @@ class Camera
 	  Vector3 yAxis;
 	  Vector3 zAxis;
 	
-	  Matrix viewMatrix;
 	  Matrix worldMatrix;
 };

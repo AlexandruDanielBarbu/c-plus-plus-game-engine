@@ -7,9 +7,11 @@ public:
 	GLuint program, vertexShader, fragmentShader;
 	char fileVS[260];
 	char fileFS[260];
+
 	GLint positionAttribute;
 	GLint colorAttribute;
 	GLint matrixUniform;
+	GLint modelViewPerspectiveUniform;
 
 	int Init(char * fileVertexShader, char * fileFragmentShader);
 	~Shaders();

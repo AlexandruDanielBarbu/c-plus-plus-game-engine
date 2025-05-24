@@ -316,6 +316,10 @@ Vector4 Vector4::operator * ( Matrix & m )
 	return res;
 }
 
+// Convert a Vector4 to Vector3
+Vector3 Vector4::toVector3() {
+	return Vector3(this->x, this->y, this->z);
+}
 
 //Matrix 4 X 4
 
